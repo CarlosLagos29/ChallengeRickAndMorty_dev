@@ -1,7 +1,11 @@
+import { NavLink } from "react-router-dom";
+
 const Card = ({image, id})=>{
     return(
         <div>
-            <img src={image} alt="" />
+            <NavLink to={`/${id}`}>
+                <img src={image} alt="" />
+            </NavLink>
         </div>
     )
 }

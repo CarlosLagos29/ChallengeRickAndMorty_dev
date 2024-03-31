@@ -12,7 +12,7 @@ const SearchBar = ()=>{
     };
     
     const handlerSearch = () => {
-        dispatch(setCharacters(search));
+        dispatch(setCharacters({name: search}));
         setSearch("")
     };
 

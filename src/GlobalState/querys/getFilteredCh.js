@@ -5,18 +5,7 @@ query ($gender: String, $status:String , $specie:String ) {
     characters(filter: { gender: $gender, status: $status, species: $specie }) {
       results {
         id
-        name
-        status
-        gender
-        type
-        species
         image
-        origin {
-          name
-        }
-        location {
-          name
-        }
       }
     }
   }
