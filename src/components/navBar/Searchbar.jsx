@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { fetchData } from "../../GlobalState/slices/characters/characterSlice";
+import { setCharacters } from "../../GlobalState/slices/character.slice";
 import { useState } from "react";
 
 const SearchBar = ()=>{
@@ -9,17 +9,16 @@ const SearchBar = ()=>{
 
     const handlerSearchBar = (event) =>{
         setSearch(event.target.value);
-        dispatch(fetchData(search));
     };
     
     const handlerSearch = () => {
-        dispatch(fetchData(search));
+        dispatch(setCharacters(search));
         setSearch("")
     };
 
     return(
-        <div>
-            <input type="search" value={search} onChange={handlerSearchBar} /> 
+        <div className=" flex ">
+            <input className=" p-1 px-2" type="search" value={search} onChange={handlerSearchBar} /> 
             <button onClick={handlerSearch}>Search</button>
         </div>
     )
