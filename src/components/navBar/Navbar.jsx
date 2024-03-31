@@ -1,11 +1,12 @@
-import SearchBar from "./Searchbar"
-
+import SearchBar from "./Searchbar";
+import Filters from "./Filters";
 
 const Navbar = () => {
     return (
-        <div>
+        <nav>
             <SearchBar/>
-        </div>
+            <Filters/>
+        </nav>
     )
 }
 

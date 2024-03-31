@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../GlobalState/slices/characters/characterSlice";
+import { setCharacters } from "../GlobalState/slices/character.slice";
+import { setSpecies } from "../GlobalState/slices/species.slice";
 import Card from "./Cards/Cards"
 import Navbar from "./navBar/Navbar";
 
@@ -10,7 +11,8 @@ const Home = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(fetchData())
+        dispatch(setSpecies());
+        dispatch(setCharacters({ page: 1,}));
     }, [dispatch]);
 
     return (
