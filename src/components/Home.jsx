@@ -12,7 +12,7 @@ const Home = () => {
     useEffect(() => {
         dispatch(fetchData())
     }, [dispatch]);
-
+//prueba commit
     return (
         <div>
             <nav className=" flex justify-center m-2">
