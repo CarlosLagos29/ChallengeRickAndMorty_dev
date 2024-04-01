@@ -7,13 +7,13 @@ import Navbar from "./navBar/Navbar";
 
 const Home = () => {
 
-    const { characters } = useSelector(state => state.characters)
+    const { characters, currentPage, totalPages, gender, species, status, name   } = useSelector(state => state.characters)
     const dispatch = useDispatch()
 
     useEffect(() => {
         dispatch(setSpecies());
-        dispatch(setCharacters({ page: 1,}));
-    }, [dispatch]);
+        dispatch(setCharacters({page: currentPage, filters: { gender, status, species, name }}));
+    }, [dispatch, currentPage, gender, species, status, name]);
 
     return (
         <div>
@@ -25,6 +25,7 @@ const Home = () => {
                     <Card image={character.image} id={character.id} key={index} />
                 ))}
             </section>
+            <h1>{totalPages}</h1>
         </div>
 
     )
