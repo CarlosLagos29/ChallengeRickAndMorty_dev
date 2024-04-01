@@ -1,29 +1,29 @@
 import { useSelector, useDispatch } from "react-redux";
-import { filterCharacters } from "../../GlobalState/slices/character.slice";
 import { useState } from "react";
+import { filtered } from "../../GlobalState/slices/character.slice";
 
 const Filters = ()=>{
 
     const{ species } = useSelector(state => state.species);
     const dispatch = useDispatch();
-    const [status, setStatus] = useState("");
-    const [gender, setGender] = useState("");
-    const [specie, setSpecie] = useState("");
+    const [statusFilter, setStatusFilter] = useState("");
+    const [genderFilter, setGenderFilter] = useState("");
+    const [specieFilter, setSpecieFilter] = useState("");
 
     const handlerStatus = (event)=>{
-        setStatus(event.target.value)
+        setStatusFilter(event.target.value)
     };
 
     const handlerGender = (event)=>{
-        setGender(event.target.value)
+        setGenderFilter(event.target.value)
     };
 
     const handlerSpecie = (event)=>{
-        setSpecie(event.target.value)
+        setSpecieFilter(event.target.value)
     };
 
     const handlerFilter = ()=>{
-        dispatch(filterCharacters({status,gender,specie}))
+        dispatch(filtered({statusFilter,genderFilter, specieFilter }))
     };
 
     return(

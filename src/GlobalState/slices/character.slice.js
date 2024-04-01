@@ -1,52 +1,65 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import client from '../apolloSetings/client';
 import GET_CHARACTERS from '../querys/getCharacters';
-import GET_FILTERED_CHARACTERS from '../querys/getFilteredCh';
 
-export const setCharacters =  createAsyncThunk( 'characters/setCharacters' ,async ({page,name}) => {
+export const setCharacters =  createAsyncThunk( 'characters/setCharacters' ,async ({page ,filters}) => {
   try {
-
+    const { gender, status, species, name } = filters;
     const { data } = await client.query({
       query: GET_CHARACTERS,
-      variables: {page , name}
+      variables: { page, gender, status, species, name }
     });
-    return data.characters.results;
-
+    
+    return data.characters
   } catch (error) {
     console.error(error);
   }
 });
-
-export const filterCharacters = createAsyncThunk('characters/filterCharacters',async ({status, gender, specie})=>{
-  try {
-    const{data} = await client.query({
-      query: GET_FILTERED_CHARACTERS,
-      variables:{status, gender, specie},
-    });
-    return data.characters.results;
-  } catch (error) {
-    console.error(error);
-  }
-})
-
 
 const characterSlice = createSlice({
   name: 'characters',
   initialState: {
     characters: [],
+    gender: "",
+    species: "",
+    status: "",
+    name:"",
+    totalPages: 1,
+    currentPage: 1,
   },
   reducers: {
+    nextPage: (state) => {
+      if(state.currentPage < state.totalPages){
+        state.currentPage ++
+      }
+    },
+    prevPage: (state)=>{
+      if(state.currentPage > 1){
+        state.currentPage --
+      }
+    },
+    setPage: (state, action) => {
+      state.currentPage = action.payload
+    },
+    explore: (state, action) => {
+      state.name = action.payload
+    },
+    filtered: (state,action) => {
+      const {statusFilter,genderFilter, specieFilter } = action.payload;
+      state.status = statusFilter;
+      state.gender = genderFilter;
+      state.species = specieFilter
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(setCharacters.fulfilled, (state, action) => {
-      state.characters = action.payload;
+      state.characters = action.payload.results;
+      state.totalPages = action.payload.info.pages; 
     });
-    builder.addCase(filterCharacters.fulfilled, (state, action) =>{
-      state.characters = action.payload;
-    })
   },
   
 });
 
+export const {setPage, prevPage, nextPage, explore, filtered} = characterSlice.actions
 export default characterSlice.reducer;
 

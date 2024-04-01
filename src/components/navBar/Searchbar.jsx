@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { setCharacters } from "../../GlobalState/slices/character.slice";
+import { explore, setPage } from "../../GlobalState/slices/character.slice";
 import { useState } from "react";
 
 const SearchBar = ()=>{
@@ -12,7 +12,8 @@ const SearchBar = ()=>{
     };
     
     const handlerSearch = () => {
-        dispatch(setCharacters(search));
+        dispatch(explore(search));
+        dispatch(setPage(1))
         setSearch("")
     };
 
