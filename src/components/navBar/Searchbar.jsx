@@ -13,7 +13,6 @@ const SearchBar = ()=>{
     
     const handlerSearch = () => {
         dispatch(explore(search));
-        dispatch(setPage(1))
         setSearch("")
     };
 

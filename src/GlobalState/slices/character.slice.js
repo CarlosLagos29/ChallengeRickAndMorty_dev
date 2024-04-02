@@ -39,16 +39,25 @@ const characterSlice = createSlice({
       }
     },
     setPage: (state, action) => {
-      state.currentPage = action.payload
+      state.currentPage = parseInt(action.payload);
     },
     explore: (state, action) => {
-      state.name = action.payload
+      state.currentPage = 1;
+      state.name = action.payload;
     },
     filtered: (state,action) => {
       const {statusFilter,genderFilter, specieFilter } = action.payload;
+      state.currentPage = 1;
       state.status = statusFilter;
       state.gender = genderFilter;
       state.species = specieFilter
+    },
+    resetFilters: (state) => {
+      state.currentPage = 1;
+      state.gender = "";
+      state.species = "";
+      state.status = "";
+      state.name = "";
     }
   },
   extraReducers: (builder) => {
@@ -57,9 +66,8 @@ const characterSlice = createSlice({
       state.totalPages = action.payload.info.pages; 
     });
   },
-  
 });
 
-export const {setPage, prevPage, nextPage, explore, filtered} = characterSlice.actions
+export const {setPage, prevPage, nextPage, explore, filtered,resetFilters} = characterSlice.actions
 export default characterSlice.reducer;
 

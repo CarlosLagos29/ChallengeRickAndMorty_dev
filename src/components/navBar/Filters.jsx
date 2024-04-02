@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
-import { filtered } from "../../GlobalState/slices/character.slice";
+import { filtered, resetFilters } from "../../GlobalState/slices/character.slice";
 
 const Filters = ()=>{
 
@@ -26,8 +26,15 @@ const Filters = ()=>{
         dispatch(filtered({statusFilter,genderFilter, specieFilter }))
     };
 
+    const clearFilters = ()=>{
+        setStatusFilter("");
+        setGenderFilter("");
+        setSpecieFilter("");
+        dispatch(resetFilters())
+    }
+
     return(
-        <div className="flex flex-row">
+        <div className="flex flex-row gap-3">
             <select name="Status" onChange={handlerStatus}>
                 <option value="">Status</option> 
                 <option value="Alive">Alive</option> 
@@ -50,6 +57,7 @@ const Filters = ()=>{
                 })}
             </select>
             <button onClick={handlerFilter}>Filter</button>
+            <button onClick={clearFilters}>Clear Filters</button>
         </div>
     )
 }
