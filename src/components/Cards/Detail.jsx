@@ -6,8 +6,8 @@ import { useParams } from "react-router-dom";
 
 const Detail = () => {
 
-    const { id } = useParams()
-    const [character, setCharacter] = useState("")
+    const { id } = useParams();
+    const [character, setCharacter] = useState("");
 
     useEffect(() => {
         client.query({
@@ -18,7 +18,7 @@ const Detail = () => {
                 setCharacter(data.character)
             }
         ).catch(error => console.error(error))
-    }, [id])
+    }, [id]);
 
     return (
         <div className=" flex flex-col justify-center items-center h-screen gap-y-3">
@@ -48,6 +48,6 @@ const Detail = () => {
                 </div>}
         </div>
     )
-}
+};
 
 export default Detail;

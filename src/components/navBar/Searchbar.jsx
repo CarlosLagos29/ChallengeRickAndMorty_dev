@@ -28,6 +28,6 @@ const SearchBar = () => {
             </button>
         </div>
     )
-}
+};
 
 export default SearchBar;

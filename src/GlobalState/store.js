@@ -7,6 +7,6 @@ const store = configureStore({
         characters: characterSlice,
         species: speciesSlice,
     }
-})
+});
 
-export default store
+export default store;

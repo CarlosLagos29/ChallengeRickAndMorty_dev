@@ -30,7 +30,7 @@ const Filters = () => {
         setGenderFilter("");
         setSpecieFilter("");
         dispatch(resetFilters())
-    }
+    };
 
     return (
         <div className="flex flex-wrap max-w-screen gap-3 bg-transparent">
@@ -68,6 +68,6 @@ const Filters = () => {
             </button>
         </div>
     )
-}
+};
 
 export default Filters;

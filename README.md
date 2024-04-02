@@ -3,75 +3,44 @@
 Nombre postulante: Carlos Sebastian Lagos
 Link a la app en producción: [LINK DEL DEPLOY]
 
-## Instrucciones
+## Introduccion
 
-- Desarrolla una aplicación web con React y Vite que permita a los usuarios buscar y visualizar información sobre personajes de la serie "Rick and Morty" utilizando la [Api de Rick and Morty](https://rickandmortyapi.com/documentation/#graphql)
-- En la carpeta **challenge-dev** se encuentra una base para que partas. Puedes decidir no usarla.
-- Debes crear un repositorio en github e invitar a [ieastorga](https://github.com/ieastorga) y a [gomara](https://github.com/gomara) como colaboradores.
-- Avisar via mail cuando este listo.
+- Aplicación desarrollada web con React y Vite que permite a los usuarios buscar y visualizar información sobre personajes de la serie "Rick and Morty" utilizando la [Api de Rick and Morty](https://rickandmortyapi.com/documentation/#graphql)
+- Para iniciar la aplicacion de manera local es necesario el comando "npm install" para descargar dependencias, e iniciar con "npm run dev" para iniciar la aplicacion.
 
-### Requisitos Funcionales
+
+### Tecnologias utiizadas
+
+Para esta aplicacion e utilizado tecnologias como:
+- TailwindCSS: para darle estilos a la apliccacion de manera eficiente.
+- Apollo Client y GraphQL: para poder consumir los datos de la api y poder utilizarlos a lo largo de toda la aplicaion.
+- React y vite: como freamworks.
+- React-router: para darle dinamismo a la pagina mediante rutas.
+- Redux-Toolkit: para el manejo de estados globales para darle mas dinamismo a la aplicacion, en particular sirvio mucho para aplicar los filtros y en la searchbar para que se puedan combinar con mayor facilidad, asi como realizar el empaginado de manera dinamica. Estas funcionalidades como la primera llamada para traer todos los personajes se hagan mediante una unica peticion.  
+
+### Funciones
 
 #### Página de Búsqueda:
 
-- Implementa una página de inicio con un campo de búsqueda.
-- Los usuarios deben poder ingresar el nombre de un personaje en el campo de búsqueda.
-- La aplicación debe mostrar los resultados correspondientes a la búsqueda.
+En esta funcionalidad aproveche la funcionalidad de graphQL para poder traerme un personaje en especifico y use Redux-Toolkit, para que simplemente modificando un parametro del estado global se haga la peticion.
 
 #### Filtros:
 
-- Implementa 3 filtros en la página de busqueda, (status, specie, gender).
-- Los usuarios deben poder seleccionar el valor deseado en cada filtro.
-- La aplicación debe mostrar los resultados correspondientes a la seleccion de los filtros. puedes inluir o no un boton para aplicar los filtros.
-- Se debe incluir un boton para resetear todos los filtros incluido el buscador.
+Para esta funcionalida al igual que la anterior aproveche la funcionalidad de graphQL para poder traerme un personaje en especifico y use Redux-Toolkit, para que simplemente modificando un parametro del estado global se haga la peticion, co la diferencia que para utilizar y usar el filtro de "species", tuve que hacer una petiicion aparte para traermme todas las especies que dispone la api, esto mediate una funcion para iterar sobre las diversas paginas que tiene la api y ver que especies disponibles tiene, todo esto realizado en una slice aparte de la de personajes para no hacer el codigo tan pesado de leer.
 
 #### Visualización de Detalles:
 
-- Al hacer clic en un personaje de la lista de resultados, la aplicación debe mostrar una página o modal de detalles con información adicional sobre el personaje seleccionado.
-- Muestra al menos la imagen, nombre, especie, estado y origen del personaje.
+En este caso hice uso de los estados locales para hacer la peticion de cada personaje, usando el id que paso por medio de la url, ya que el detalle de cada personaje tiene su propia ruta dinamica.
+En el caso de la info hay un pequeño detalle que puede pasar desapercibido que es que los personajes que no tienen subespecie no se renderiza esa info. 
 
 #### GraphQL:
 
-- Utiliza GraphQL para realizar consultas a la API de Rick and Morty en lugar de utilizar solo REST.
+Utilice Apollo client para esta tarea, fue lo que mas me costo de la aplicacion ya que no estoy acostumbrado a hacer peticiones mediante GraphQL, pero fue divertido aprender cosas nuevas y crecer en esta tecnologia.
 
-#### Estilo y Diseño:
+#### Paginación:
 
-- Aplica estilos para que la aplicación sea visualmente atractiva y fácil de usar.
-- Puedes utilizar bibliotecas de diseño o crear tus propios estilos.
+Aprovechando el uso de Redux-toolkit y la busqueda or paginas que ofrece la api pude lograr hacer una muy buena paginacion que ademas de ser dinamica, esta esta libre de bugs posibles que pueden ocurrir al hacer filtrados o busquedas.
 
-#### Paginación(BONUS):
+### Conclusión:
 
-- Implementa paginación en la lista de resultados para mostrar más personajes a medida que el usuario se desplaza.
-- La API de Rick and Morty soporta paginación, puedes utilizarla para cargar más resultados.
-
-Se espera que logres hacer una aplicación parecida a la del siguiente diagrama (es solo un ejemplo):
-
-![main](imgs/main.png)
-![modal](imgs/modal.png)
-
-La funcionalidad y estructura debe ser igual, pero el diseño y variantes (por ejemplo, cambiar colores de las cosas) queda a tu gusto.
-
-Además de esto, se espera que hagas deploy de tu app en el servicio que desees (Vercel, Heroku, Netlify, AWS, Github Pages, etc).
-
-## Consideraciones
-
-- Se espera que uses buenas prácticas como gitflow (pull requests y commits), orden del código, estructura, eficiencia, etc.
-- Puedes dejar comentarios de decisiones que tuviste que tomar y del por qué en este repositorio.
-- Se va a considerar un buen diseño de UX/UI.
-
-## Hints
-
-Acá van algunas cosas que pueden ser útiles (o no 👀):
-
-- [Gitignore](https://www.toptal.com/developers/gitignore)
-- [GraphQL](https://www.howtographql.com/)
-- [React](https://es.reactjs.org/)
-- [Styled components](https://styled-components.com/docs/basics)
-- [ApolloClient](https://www.apollographql.com/docs/react/)
-- [Lodash](https://lodash.com/)
-- [Conventional commits](https://www.conventionalcommits.org/en/v1.0.0/)
-- [Commitlint](https://commitlint.js.org/#/)
-- [Eslint](https://eslint.org/)
-- [Husky](https://www.npmjs.com/package/husky)
-- [Vite](https://vitejs.dev/)
-- [Tailwind](https://tailwindcss.com/)
+Disfrute mucho haciendo este challenge ya que e permitio crecer comoprogramador y desarrollar diferentes funciones muy divertidas.

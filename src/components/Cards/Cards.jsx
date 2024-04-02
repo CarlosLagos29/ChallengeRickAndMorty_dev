@@ -12,6 +12,6 @@ const Card = ({image,name, id, index})=>{
             </NavLink>
         </div>
     )
-}
+};
 
-export default Card
+export default Card;

@@ -35,6 +35,6 @@ const speciesSlice = createSlice({
             state.allSpecies = action.payload
         })
     }
-})
+});
 
 export default speciesSlice.reducer;

@@ -8,6 +8,6 @@ const Navbar = () => {
             <Filters/>
         </nav>
     )
-}
+};
 
-export default Navbar
+export default Navbar;
