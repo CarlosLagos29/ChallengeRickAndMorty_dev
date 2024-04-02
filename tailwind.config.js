@@ -11,6 +11,10 @@ export default {
         blue: "#31fcce",
         greenLime: "#16ee65",
         greenTransition: "#28fe8a",
+      },
+      fontFamily:{
+        'Indie_Flower': ['Indie Flower','cursive'],
+        'Permanent_Marker':['Permanent Marker','cursive']
       }
     },
   },

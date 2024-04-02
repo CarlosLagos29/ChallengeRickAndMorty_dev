@@ -8,7 +8,7 @@ import Paginaton from "./Pagination";
 
 const Home = () => {
 
-    const { characters, currentPage, gender, species, status, name } = useSelector(state => state.characters);
+    const { characters, currentPage, gender, species, status, name, loading } = useSelector(state => state.characters);
     const { allSpecies } = useSelector(state => state.species);
     const dispatch = useDispatch();
 
@@ -23,13 +23,15 @@ const Home = () => {
                 <Navbar />
             </nav>
             <section className=" flex flex-wrap gap-4 items-center justify-center">
-                {allSpecies.length ?
+                {(allSpecies.length === 0 || loading) ? (
+                    <span className="h-screen">
+                        <img src="https://cdn.dribbble.com/users/233030/screenshots/3932726/rick-sanchez.gif" alt="Loading Page" />
+                    </span>
+                ) : (
                     characters.map((character, index) => (
-                            <Card image={character.image} name={character.name} id={character.id} key={index} index={index} />
+                        <Card image={character.image} name={character.name} id={character.id} key={index} index={index} />
                     ))
-                    :
-                    <img src="https://cdn.dribbble.com/users/233030/screenshots/3932726/rick-sanchez.gif" alt="Loading Page" />
-                }
+                )}
             </section>
             {allSpecies.length ? <Paginaton /> : null}
         </div>

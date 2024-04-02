@@ -33,7 +33,7 @@ const Filters = () => {
     }
 
     return (
-        <div className="flex flex-row gap-3 bg-transparent">
+        <div className="flex flex-wrap max-w-screen gap-3 bg-transparent">
             <select name="Status" onChange={handlerStatus}
                 className="bg-backGround rounded-2xl p-1 border border-white  hover:bg-blue hover:border-transparent transition duration-500">
                 <option value="">Status</option>
