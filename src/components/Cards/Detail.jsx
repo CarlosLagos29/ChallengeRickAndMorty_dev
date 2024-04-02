@@ -29,7 +29,7 @@ const Detail = () => {
                          px-3 mb-3 rounded-xl text-3xl">Back to home</button>
                     </NavLink>
 
-                    <section className=" flex p-5 items-center justify-center border-8 border-greenLime gap-3 rounded-2xl">
+                    <section className=" flex flex-col p-5 items-center justify-center border-8 border-greenLime gap-3 rounded-2xl">
                         <span>
                             <img className="rounded-2xl" src={character.image} alt={character.name} />
                         </span>
