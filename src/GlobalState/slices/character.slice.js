@@ -26,6 +26,7 @@ const characterSlice = createSlice({
     name:"",
     totalPages: 1,
     currentPage: 1,
+    loading: false,
   },
   reducers: {
     nextPage: (state) => {
@@ -64,7 +65,11 @@ const characterSlice = createSlice({
     builder.addCase(setCharacters.fulfilled, (state, action) => {
       state.characters = action.payload.results;
       state.totalPages = action.payload.info.pages; 
+      state.loading = false;
     });
+    builder.addCase(setCharacters.pending, (state)=>{
+      state.loading = true;
+    }) 
   },
 });
 

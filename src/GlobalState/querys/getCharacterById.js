@@ -16,6 +16,10 @@ query($id: ID! ) {
       location {
         name
       }
+      episode{
+        id
+        name
+      }
     }
   }
 `;
