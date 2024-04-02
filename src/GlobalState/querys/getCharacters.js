@@ -8,6 +8,7 @@ query ($page: Int!, $gender: String, $status: String, $species: String, $name: S
     }
     results {
       id
+      name
       image
     }
   }

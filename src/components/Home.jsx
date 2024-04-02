@@ -4,10 +4,11 @@ import { setCharacters } from "../GlobalState/slices/character.slice";
 import { setSpecies } from "../GlobalState/slices/species.slice";
 import Card from "./Cards/Cards"
 import Navbar from "./navBar/Navbar";
+import Paginaton from "./Pagination";
 
 const Home = () => {
 
-    const { characters, currentPage, totalPages, gender, species, status, name   } = useSelector(state => state.characters)
+    const { characters, currentPage, gender, species, status, name   } = useSelector(state => state.characters)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -17,15 +18,15 @@ const Home = () => {
 
     return (
         <div>
-            <nav className=" flex justify-center m-2">
+            <nav className=" my-5 mx-20">
                 <Navbar/>
             </nav>
             <section className=" flex flex-wrap gap-2 items-center justify-center">
                 {characters.map((character, index) => (
-                    <Card image={character.image} id={character.id} key={index} />
+                    <Card image={character.image} name={character.name} id={character.id} key={index} />
                 ))}
             </section>
-            <h1>{totalPages}</h1>
+            <Paginaton/>
         </div>
 
     )

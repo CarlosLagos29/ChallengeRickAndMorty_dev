@@ -3,7 +3,7 @@ import Filters from "./Filters";
 
 const Navbar = () => {
     return (
-        <nav>
+        <nav className=" flex justify-between items-center border-black border-3">
             <SearchBar/>
             <Filters/>
         </nav>
