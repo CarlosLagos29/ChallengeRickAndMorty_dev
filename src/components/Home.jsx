@@ -8,27 +8,31 @@ import Paginaton from "./Pagination";
 
 const Home = () => {
 
-    const { characters, currentPage, gender, species, status, name   } = useSelector(state => state.characters)
-    const dispatch = useDispatch()
+    const { characters, currentPage, gender, species, status, name } = useSelector(state => state.characters);
+    const { allSpecies } = useSelector(state => state.species);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(setSpecies());
-        dispatch(setCharacters({page: currentPage, filters: { gender, status, species, name }}));
+        dispatch(setCharacters({ page: currentPage, filters: { gender, status, species, name } }));
     }, [dispatch, currentPage, gender, species, status, name]);
 
     return (
         <div>
             <nav className=" my-5 mx-20">
-                <Navbar/>
+                <Navbar />
             </nav>
-            <section className=" flex flex-wrap gap-2 items-center justify-center">
-                {characters.map((character, index) => (
-                    <Card image={character.image} name={character.name} id={character.id} key={index} />
-                ))}
+            <section className=" flex flex-wrap gap-4 items-center justify-center">
+                {allSpecies.length ?
+                    characters.map((character, index) => (
+                            <Card image={character.image} name={character.name} id={character.id} key={index} index={index} />
+                    ))
+                    :
+                    <img src="https://cdn.dribbble.com/users/233030/screenshots/3932726/rick-sanchez.gif" alt="Loading Page" />
+                }
             </section>
-            <Paginaton/>
+            {allSpecies.length ? <Paginaton /> : null}
         </div>
-
     )
 };
 

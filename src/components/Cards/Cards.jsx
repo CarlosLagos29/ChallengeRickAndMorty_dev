@@ -1,10 +1,10 @@
 import { NavLink } from "react-router-dom";
 
-const Card = ({image,name, id})=>{
+const Card = ({image,name, id, index})=>{
     return(
-        <div className=" border-8 rounded-2xl border-green-400 p-2 text-center">
+        <div className={`${index % 2 != 0? "border-blue": " border-greenLime"} border-8 rounded-2xl p-2 text-center hover:scale-105 transition-transform`}>
             <NavLink to={`/${id}`}>
-                <img className=" rounded-2xl" src={image} alt={id} />
+                <img className="rounded-2xl" src={image} alt={name} />
                 <h1>{name}</h1>
             </NavLink>
         </div>

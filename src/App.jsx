@@ -6,7 +6,7 @@ import Detail from "./components/Cards/Detail"
 
 function App(){
   return (
-   <div>
+   <div className="text-white">
     <Routes>
       <Route path="/" element={<Home/>}/>
       <Route path="/:id" element={<Detail/>}/>

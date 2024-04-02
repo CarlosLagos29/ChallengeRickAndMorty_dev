@@ -25,14 +25,14 @@ export const setSpecies = createAsyncThunk('species/setSpecies', async () => {
 const speciesSlice = createSlice({
     name: 'species',
     initialState:{
-        species:[],
+        allSpecies:[],
     },
     reducers:{
 
     },
     extraReducers: (builder) =>{
         builder.addCase(setSpecies.fulfilled, (state, action) => {
-            state.species = action.payload
+            state.allSpecies = action.payload
         })
     }
 })

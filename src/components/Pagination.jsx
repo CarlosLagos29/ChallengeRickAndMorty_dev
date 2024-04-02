@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 
-const Paginaton = ()=>{
-    
+const Paginaton = () => {
+
     const { currentPage, totalPages } = useSelector(state => state.characters);
     const dispatch = useDispatch();
 
@@ -34,27 +34,33 @@ const Paginaton = ()=>{
         generatePageNumbers();
     }, [currentPage, totalPages]);
 
-    const handlerPrev = ()=>{
+    const handlerPrev = () => {
         dispatch(prevPage())
     };
 
-    const handlerNext = ()=>{
+    const handlerNext = () => {
         dispatch(nextPage())
     };
 
-    const handlerPage = (event) =>{
+    const handlerPage = (event) => {
         dispatch(setPage(event.target.value))
     };
 
-     return(
+    return (
         <div className=" flex justify-center text-xl gap-3">
-            <button onClick={handlerPrev}> { "<" } </button>
-            {numberPages.map((n , i) =>{
-                return(
-                    <button className={`${n == currentPage? " bg-green-400": ""} rounded-full p-2`} key={i} value={n} onClick={handlerPage}>{n}</button>
+            <button onClick={handlerPrev} disabled={currentPage == 1} className={`${currentPage == 1 ? " text-slate-500" : ""}`}>
+                {"<"}
+            </button>
+            {numberPages.map((n, i) => {
+                return (
+                    <button className={`${n == currentPage ? " bg-green-400" : ""} rounded-full p-2`} key={i} value={n} onClick={handlerPage}>
+                        {n}
+                    </button>
                 )
             })}
-            <button onClick={handlerNext}> { ">" } </button>
+            <button onClick={handlerNext} disabled={currentPage == totalPages} className={`${currentPage == totalPages ? " text-slate-500" : ""}`}>
+                {">"}
+            </button>
         </div>
     )
 };
