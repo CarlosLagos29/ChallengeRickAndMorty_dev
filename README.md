@@ -1,7 +1,7 @@
 # Desafío para Dev
 
 Nombre postulante: Carlos Sebastian Lagos
-Link a la app en producción: [LINK DEL DEPLOY]
+Link a la app en producción: https://challengerickandmorty.netlify.app/
 
 ## Introduccion
 
