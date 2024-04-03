@@ -17,7 +17,7 @@ const SearchBar = () => {
     };
 
     return (
-        <div className=" flex flex-wrap max-w-screen gap-2 p-2 ">
+        <div className=" flex max-w-screen gap-2 p-2 ">
             <input className=" p-1 px-2 bg-transparent rounded-2xl border border-white max-w-screen "
                 type="search" value={search} onChange={handlerSearchBar} />
             <button onClick={handlerSearch}
