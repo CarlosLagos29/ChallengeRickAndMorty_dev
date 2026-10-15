@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { explore, setPage } from "../../GlobalState/slices/character.slice";
+import { explore } from "../../GlobalState/slices/character.slice";
 import { useState } from "react";
 
 const SearchBar = () => {
