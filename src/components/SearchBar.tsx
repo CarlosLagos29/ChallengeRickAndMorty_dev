@@ -18,9 +18,13 @@ const SearchBar = ({ initialValue, onSearch }: SearchBarProps) => {
   };
 
   return (
-    <form role="search" onSubmit={handlerSubmit} className="flex max-w-screen gap-2 p-2">
+    <form
+      role="search"
+      onSubmit={handlerSubmit}
+      className="flex h-10 w-full items-center rounded-2xl border border-white focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-portal lg:flex-1 xl:w-64 xl:flex-none"
+    >
       <input
-        className="max-w-screen rounded-2xl border border-white bg-transparent p-1 px-2"
+        className="min-w-0 flex-1 bg-transparent pl-3 focus-visible:outline-none [&::-webkit-search-cancel-button]:appearance-none"
         type="search"
         value={search}
         onChange={handlerChange}
@@ -30,13 +34,13 @@ const SearchBar = ({ initialValue, onSearch }: SearchBarProps) => {
       <button
         type="submit"
         aria-label="Search"
-        className="flex items-center rounded-2xl border border-white p-1 px-2 transition duration-500 hover:border-transparent hover:bg-green-lime"
+        className="mr-1 grid size-8 shrink-0 place-items-center rounded-full transition duration-300 hover:bg-green-lime hover:text-background focus-visible:outline-offset-0"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"
-          width="24"
-          height="24"
+          width="20"
+          height="20"
           fill="none"
           stroke="currentColor"
           strokeWidth="3"

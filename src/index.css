@@ -10,8 +10,47 @@
 }
 
 @layer base {
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-background);
+    background-image: radial-gradient(
+      ellipse at top,
+      color-mix(in srgb, var(--color-portal) 12%, transparent),
+      transparent 60%
+    );
+    background-repeat: no-repeat;
+  }
+
+  body:has(dialog[open]) {
+    overflow: hidden;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-portal);
+    outline-offset: 2px;
+  }
+
   button:not(:disabled),
   [role='button']:not(:disabled) {
     cursor: pointer;
+  }
+}
+
+@keyframes sheet-up {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
 }

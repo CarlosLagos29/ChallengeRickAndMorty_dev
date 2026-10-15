@@ -32,6 +32,7 @@ const useCharacterFilters = () => {
         else params.delete(key);
       }
       params.delete('page');
+      params.delete('character');
       return params;
     });
   };
@@ -41,6 +42,7 @@ const useCharacterFilters = () => {
       const params = new URLSearchParams(prev);
       if (nextPage > 1) params.set('page', String(nextPage));
       else params.delete('page');
+      params.delete('character');
       return params;
     });
   };

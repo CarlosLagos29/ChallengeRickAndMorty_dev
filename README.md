@@ -1,46 +1,101 @@
-# Desafío para Dev
+# Rick and Morty Explorer
 
-Nombre postulante: Carlos Sebastian Lagos
-Link a la app en producción: https://challengerickandmorty.netlify.app/
+[![CI](https://github.com/CarlosLagos29/ChallengeRickAndMorty_dev/actions/workflows/ci.yml/badge.svg)](https://github.com/CarlosLagos29/ChallengeRickAndMorty_dev/actions/workflows/ci.yml)
 
-## Introduccion
+Search and filter every character of the show using the public [Rick and Morty GraphQL API](https://rickandmortyapi.com/documentation/#graphql).
 
-- Aplicación desarrollada web con React y Vite que permite a los usuarios buscar y visualizar información sobre personajes de la serie "Rick and Morty" utilizando la [Api de Rick and Morty](https://rickandmortyapi.com/documentation/#graphql)
-- Para iniciar la aplicacion de manera local es necesario el comando "npm install" para descargar dependencias, e iniciar con "npm run dev" para iniciar la aplicacion.
+**Live demo:** https://challengerickandmorty.netlify.app/
 
-### Tecnologias utiizadas
+<p align="center">
+  <img src="docs/screenshot-desktop.webp" alt="Character grid on desktop" width="72%" />
+  &nbsp;
+  <img src="docs/screenshot-mobile.webp" alt="Character details on mobile" width="22%" />
+</p>
 
-Para esta aplicacion e utilizado tecnologias como:
+## Features
 
-- TailwindCSS: para darle estilos a la apliccacion de manera eficiente.
-- Apollo Client y GraphQL: para poder consumir los datos de la api y poder utilizarlos a lo largo de toda la aplicaion.
-- React y vite: como freamworks.
-- React-router: para darle dinamismo a la pagina mediante rutas.
-- Redux-Toolkit: para el manejo de estados globales para darle mas dinamismo a la aplicacion, en particular sirvio mucho para aplicar los filtros y en la searchbar para que se puedan combinar con mayor facilidad, asi como realizar el empaginado de manera dinamica. Estas funcionalidades como la primera llamada para traer todos los personajes se hagan mediante una unica peticion.
+- **Search** characters by name.
+- **Filters** by status, gender and species that can be combined with each other and with the search.
+- **Pagination** with first/last page shortcuts. It shows 10 pages on desktop and 3 on mobile.
+- **Character details** in a modal: a centered dialog on desktop and a bottom sheet on mobile that you can drag down to close.
+- **Shareable URLs:** filters, page and the open character live in the query string (`/?status=Alive&page=2&character=1`). Refreshing keeps everything, and the browser back button closes the modal.
+- **Responsive** from 360px, accessible with the keyboard and with `prefers-reduced-motion` support.
 
-### Funciones
+## Tech stack
 
-#### Página de Búsqueda:
+| Area    | Tools                                         |
+| ------- | --------------------------------------------- |
+| UI      | React 19, TypeScript (strict), Tailwind CSS 4 |
+| Data    | Apollo Client 4, GraphQL                      |
+| Routing | React Router 8                                |
+| Build   | Vite 8                                        |
+| Quality | ESLint, Prettier, Vitest, Testing Library     |
+| CI/CD   | GitHub Actions, Netlify                       |
 
-En esta funcionalidad aproveche la funcionalidad de graphQL para poder traerme un personaje en especifico y use Redux-Toolkit, para que simplemente modificando un parametro del estado global se haga la peticion.
+## Technical decisions
 
-#### Filtros:
+**The URL is the state.** There is no global store. Filters, the current page and the open character are query params, read and written through two small hooks (`useCharacterFilters` and `useCharacterModal`). Server data lives in the Apollo cache, so going back to a page you already visited doesn't trigger a new request. An earlier version used Redux Toolkit; removing it made the app simpler and gave it shareable links for free.
 
-Para esta funcionalida al igual que la anterior aproveche la funcionalidad de graphQL para poder traerme un personaje en especifico y use Redux-Toolkit, para que simplemente modificando un parametro del estado global se haga la peticion, co la diferencia que para utilizar y usar el filtro de "species", tuve que hacer una petiicion aparte para traermme todas las especies que dispone la api, esto mediate una funcion para iterar sobre las diversas paginas que tiene la api y ver que especies disponibles tiene, todo esto realizado en una slice aparte de la de personajes para no hacer el codigo tan pesado de leer.
+**A single route.** The character details are a modal opened with `?character=<id>` instead of a `/detail/:id` page. The app only needs the `/` route, so deep links can't break because of how the host handles client-side routing.
 
-#### Visualización de Detalles:
+**Working around the API rate limit.** The API has no endpoint that lists species, and it allows about 30 requests per IP. The first version fetched all 42 pages of characters to build the species filter, which hit the limit on every load. Now the app asks for the total number of characters and fetches all of them in one `charactersByIds` request that only asks for the `species` field: 2 requests in total, and the list still updates by itself if the API adds new species.
 
-En este caso hice uso de los estados locales para hacer la peticion de cada personaje, usando el id que paso por medio de la url, ya que el detalle de cada personaje tiene su propia ruta dinamica.
-En el caso de la info hay un pequeño detalle que puede pasar desapercibido que es que los personajes que no tienen subespecie no se renderiza esa info.
+**Native `<dialog>`.** The modal uses `showModal()`, which gives focus trapping, closing with Esc and the top layer without extra libraries.
 
-#### GraphQL:
+**No third-party images.** The loader and the 404 page use an animated SVG portal drawn in code, and the font is self-hosted. The only remote images are the character pictures from the API.
 
-Utilice Apollo client para esta tarea, fue lo que mas me costo de la aplicacion ya que no estoy acostumbrado a hacer peticiones mediante GraphQL, pero fue divertido aprender cosas nuevas y crecer en esta tecnologia.
+## Getting started
 
-#### Paginación:
+Requires **Node.js 24** (see `.nvmrc`).
 
-Aprovechando el uso de Redux-toolkit y la busqueda or paginas que ofrece la api pude lograr hacer una muy buena paginacion que ademas de ser dinamica, esta esta libre de bugs posibles que pueden ocurrir al hacer filtrados o busquedas.
+```bash
+nvm use
+npm install
+npm run dev
+```
 
-### Conclusión:
+The app runs at http://localhost:5173.
 
-Disfrute mucho haciendo este challenge ya que e permitio crecer comoprogramador y desarrollar diferentes funciones muy divertidas.
+### Scripts
+
+| Script                | Description                                                                              |
+| --------------------- | ---------------------------------------------------------------------------------------- |
+| `npm run dev`         | Start the development server                                                             |
+| `npm run build`       | Build for production                                                                     |
+| `npm run preview`     | Preview the production build                                                             |
+| `npm run lint`        | Type check, lint and check formatting                                                    |
+| `npm run lint:fix`    | Fix lint errors and format the code                                                      |
+| `npm test`            | Run the test suite                                                                       |
+| `npm run test:watch`  | Run the tests in watch mode                                                              |
+| `npm run screenshots` | Regenerate the README screenshots (needs Chrome; set `CHROME_PATH` if it isn't detected) |
+
+## Project structure
+
+```
+src/
+├── components/   Presentational components (cards, filters, modal, pagination, portal)
+├── constants/    Filter options
+├── graphql/      Typed GraphQL queries
+├── hooks/        URL state, species and media query hooks
+├── lib/          Apollo Client setup
+├── pages/        Components that fetch data (home, character details, 404)
+├── styles/       Theme tokens for Tailwind
+├── test/         Test setup and helpers
+├── types/        Domain types
+└── utils/        Pure helpers (pagination window)
+```
+
+## Testing
+
+Tests live next to the code they cover (`*.test.ts(x)`) and run with Vitest and Testing Library in jsdom. They never call the real API: every request is mocked with Apollo's `MockedProvider`, so they are fast and deterministic.
+
+They cover the pagination logic, the URL state hooks, the components (search, filters and pagination) and the main flows: loading, filtering, empty and error states, and opening, navigating and closing the character modal.
+
+## CI/CD
+
+- **GitHub Actions** runs type checking, lint, formatting, tests and the build on every pull request and every push to `main`.
+- **Netlify** runs the same checks before deploying, so a failing check never reaches production.
+
+## Credits
+
+Data and character images come from [The Rick and Morty API](https://rickandmortyapi.com/). Rick and Morty is created by Justin Roiland and Dan Harmon and is a trademark of Adult Swim. This is a non-commercial fan project.
