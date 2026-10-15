@@ -8,15 +8,15 @@ Link a la app en producción: https://challengerickandmorty.netlify.app/
 - Aplicación desarrollada web con React y Vite que permite a los usuarios buscar y visualizar información sobre personajes de la serie "Rick and Morty" utilizando la [Api de Rick and Morty](https://rickandmortyapi.com/documentation/#graphql)
 - Para iniciar la aplicacion de manera local es necesario el comando "npm install" para descargar dependencias, e iniciar con "npm run dev" para iniciar la aplicacion.
 
-
 ### Tecnologias utiizadas
 
 Para esta aplicacion e utilizado tecnologias como:
+
 - TailwindCSS: para darle estilos a la apliccacion de manera eficiente.
 - Apollo Client y GraphQL: para poder consumir los datos de la api y poder utilizarlos a lo largo de toda la aplicaion.
 - React y vite: como freamworks.
 - React-router: para darle dinamismo a la pagina mediante rutas.
-- Redux-Toolkit: para el manejo de estados globales para darle mas dinamismo a la aplicacion, en particular sirvio mucho para aplicar los filtros y en la searchbar para que se puedan combinar con mayor facilidad, asi como realizar el empaginado de manera dinamica. Estas funcionalidades como la primera llamada para traer todos los personajes se hagan mediante una unica peticion.  
+- Redux-Toolkit: para el manejo de estados globales para darle mas dinamismo a la aplicacion, en particular sirvio mucho para aplicar los filtros y en la searchbar para que se puedan combinar con mayor facilidad, asi como realizar el empaginado de manera dinamica. Estas funcionalidades como la primera llamada para traer todos los personajes se hagan mediante una unica peticion.
 
 ### Funciones
 
@@ -31,7 +31,7 @@ Para esta funcionalida al igual que la anterior aproveche la funcionalidad de gr
 #### Visualización de Detalles:
 
 En este caso hice uso de los estados locales para hacer la peticion de cada personaje, usando el id que paso por medio de la url, ya que el detalle de cada personaje tiene su propia ruta dinamica.
-En el caso de la info hay un pequeño detalle que puede pasar desapercibido que es que los personajes que no tienen subespecie no se renderiza esa info. 
+En el caso de la info hay un pequeño detalle que puede pasar desapercibido que es que los personajes que no tienen subespecie no se renderiza esa info.
 
 #### GraphQL:
 

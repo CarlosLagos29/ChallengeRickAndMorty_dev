@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme {
   --color-backGround: #010024;
@@ -6,12 +6,12 @@
   --color-greenLime: #16ee65;
   --color-greenTransition: #28fe8a;
 
-  --font-Permanent_Marker: "Permanent Marker", cursive;
+  --font-Permanent_Marker: 'Permanent Marker', cursive;
 }
 
 @layer base {
   button:not(:disabled),
-  [role="button"]:not(:disabled) {
+  [role='button']:not(:disabled) {
     cursor: pointer;
   }
 }

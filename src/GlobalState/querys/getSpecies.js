@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 
 export const GET_CHARACTERS_COUNT = gql`
-query GetCharactersCount {
+  query GetCharactersCount {
     characters {
       info {
         count
@@ -11,8 +11,8 @@ query GetCharactersCount {
 `;
 
 const GET_SPECIES = gql`
-query GetSpecies ($ids: [ID!]!) {
-    charactersByIds (ids: $ids) {
+  query GetSpecies($ids: [ID!]!) {
+    charactersByIds(ids: $ids) {
       species
     }
   }
