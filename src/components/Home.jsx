@@ -8,12 +8,14 @@ import Paginaton from "./Pagination";
 
 const Home = () => {
 
-    const { characters, currentPage, gender, species, status, name, loading } = useSelector(state => state.characters);
-    const { allSpecies } = useSelector(state => state.species);
+    const { characters, currentPage, gender, species, status, name, loading, error } = useSelector(state => state.characters);
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(setSpecies());
+    }, [dispatch]);
+
+    useEffect(() => {
         dispatch(setCharacters({ page: currentPage, filters: { gender, status, species, name } }));
     }, [dispatch, currentPage, gender, species, status, name]);
 
@@ -23,17 +25,21 @@ const Home = () => {
                 <Navbar />
             </nav>
             <section className=" flex flex-wrap gap-4 items-center justify-center">
-                {(allSpecies.length === 0 || loading) ? (
+                {loading ? (
                     <span className="h-screen">
                         <img src="https://cdn.dribbble.com/users/233030/screenshots/3932726/rick-sanchez.gif" alt="Loading Page" />
                     </span>
+                ) : error ? (
+                    <p className="mt-10 text-center">Something went wrong loading the characters. Please try again later.</p>
+                ) : characters.length === 0 ? (
+                    <p className="mt-10 text-center">No characters found</p>
                 ) : (
                     characters.map((character, index) => (
-                        <Card image={character.image} name={character.name} id={character.id} key={index} index={index} />
+                        <Card image={character.image} name={character.name} id={character.id} key={character.id} index={index} />
                     ))
                 )}
             </section>
-            {allSpecies.length ? <Paginaton /> : null}
+            {!loading && characters.length > 0 ? <Paginaton /> : null}
         </div>
     )
 };

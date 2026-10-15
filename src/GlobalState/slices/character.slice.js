@@ -2,17 +2,18 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import client from '../apolloSetings/client';
 import GET_CHARACTERS from '../querys/getCharacters';
 
-export const setCharacters =  createAsyncThunk( 'characters/setCharacters' ,async ({page ,filters}) => {
+export const setCharacters =  createAsyncThunk( 'characters/setCharacters' ,async ({page ,filters}, { rejectWithValue }) => {
   try {
     const { gender, status, species, name } = filters;
     const { data } = await client.query({
       query: GET_CHARACTERS,
       variables: { page, gender, status, species, name }
     });
-    
+
     return data.characters
   } catch (error) {
     console.error(error);
+    return rejectWithValue(error.message);
   }
 });
 
@@ -27,6 +28,7 @@ const characterSlice = createSlice({
     totalPages: 1,
     currentPage: 1,
     loading: false,
+    error: null,
   },
   reducers: {
     nextPage: (state) => {
@@ -64,12 +66,18 @@ const characterSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(setCharacters.fulfilled, (state, action) => {
       state.characters = action.payload.results;
-      state.totalPages = action.payload.info.pages; 
+      state.totalPages = action.payload.info.pages ?? 1;
       state.loading = false;
     });
     builder.addCase(setCharacters.pending, (state)=>{
       state.loading = true;
-    }) 
+      state.error = null;
+    });
+    builder.addCase(setCharacters.rejected, (state, action)=>{
+      state.characters = [];
+      state.loading = false;
+      state.error = action.payload ?? action.error.message;
+    });
   },
 });
 

@@ -52,9 +52,9 @@ const Filters = () => {
             <select name="Specie" onChange={handlerSpecie}
                 className="bg-backGround rounded-2xl border p-1 border-white  hover:bg-blue hover:border-transparent transition duration-500 ">
                 <option value="">Species</option>
-                {allSpecies.length && allSpecies.map((s, index) => {
+                {allSpecies.map((s) => {
                     return (
-                        <option value={s} key={index}>{s}</option >
+                        <option value={s} key={s}>{s}</option >
                     )
                 })}
             </select>

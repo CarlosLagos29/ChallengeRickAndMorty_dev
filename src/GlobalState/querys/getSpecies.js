@@ -1,11 +1,19 @@
 import { gql } from '@apollo/client';
 
-const GET_SPECIES = gql`
-query GetSpecies ($page: Int!) {
-    characters (page: $page){
-      results {
-          species
+export const GET_CHARACTERS_COUNT = gql`
+query GetCharactersCount {
+    characters {
+      info {
+        count
       }
+    }
+  }
+`;
+
+const GET_SPECIES = gql`
+query GetSpecies ($ids: [ID!]!) {
+    charactersByIds (ids: $ids) {
+      species
     }
   }
 `;
