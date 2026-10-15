@@ -5,7 +5,7 @@ interface StatusMessageProps {
 }
 
 const StatusMessage = ({ children }: StatusMessageProps) => (
-  <p className="mt-10 text-center">{children}</p>
+  <p className="col-span-full mt-10 text-center">{children}</p>
 );
 
 export default StatusMessage;

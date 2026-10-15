@@ -44,7 +44,10 @@ describe('HomePage', () => {
     expect(screen.getByRole('status')).toHaveTextContent('Loading...');
     expect(await screen.findByRole('heading', { name: 'Rick Sanchez' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Morty Smith' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Rick Sanchez/ })).toHaveAttribute('href', '/detail/1');
+    expect(screen.getByRole('link', { name: /Rick Sanchez/ })).toHaveAttribute(
+      'href',
+      '/?character=1',
+    );
   });
 
   it('queries the API with the filters from the URL', async () => {

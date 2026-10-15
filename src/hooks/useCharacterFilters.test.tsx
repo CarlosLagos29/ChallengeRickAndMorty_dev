@@ -72,4 +72,14 @@ describe('useCharacterFilters', () => {
     expect(result.current.hasFilters).toBe(false);
     expect(screen.getByTestId('location')).toHaveTextContent(/^\/$/);
   });
+
+  it('closes the character modal when a filter or the page changes', () => {
+    const { result } = renderFilters('/?status=Alive&character=1');
+
+    act(() => result.current.setFilters({ gender: 'Male' }));
+    expect(screen.getByTestId('location')).toHaveTextContent('/?status=Alive&gender=Male');
+
+    act(() => result.current.setPage(2));
+    expect(screen.getByTestId('location')).not.toHaveTextContent('character');
+  });
 });
