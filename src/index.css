@@ -1,12 +1,12 @@
 @import 'tailwindcss';
+@import './styles/_variables.css';
 
-@theme {
-  --color-backGround: #010024;
-  --color-blue: #31fcce;
-  --color-greenLime: #16ee65;
-  --color-greenTransition: #28fe8a;
-
-  --font-Permanent_Marker: 'Permanent Marker', cursive;
+@font-face {
+  font-family: 'Permanent Marker';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/permanent-marker.woff2') format('woff2');
 }
 
 @layer base {
